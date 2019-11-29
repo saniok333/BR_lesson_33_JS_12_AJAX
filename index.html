@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>FilmSearch</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <form id="searchForm">
+    <input type="text" id="searchText" placeholder="Search Movies...">
+    <select name="" id="searchType">
+      <option selected value="movie">movie</option>
+      <option value="series">series</option>
+      <option value="episode">episode</option>
+    </select>
+    <button id="search_btn">Search</button>
+  </form>
+  <div id="movies"></div>
+  <div id="details"></div>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
