@@ -36,20 +36,18 @@ let getMovies = (searchText, searchType, pageNumb) => {
 };
 
 let formPaginBtnsSection = (pageNumb, pagesAmount) => {
-    let tempArr = [];
-    for (let i = (+pageNumb - 5); i <= (+pageNumb + 5); i++) {
-        if (i > 1 && i < pagesAmount) {
-            tempArr.push(i);
-        };
-    };
     let paginationSection = `<button class="pagin-btn" id="pagin_btn1">1</button>`;
-    if (tempArr[0] > 2) {
+    if ((+pageNumb - 5) > 2) {
         paginationSection += `<span>. . .<span>`;
     };
-    for (let btnNumb of tempArr) {
-        paginationSection += `<button class="pagin-btn" id="pagin_btn${btnNumb}">${btnNumb}</button>`;
+    let maxInd;
+    for (let i = (+pageNumb - 5); i <= (+pageNumb + 5); i++) {
+        if (i > 1 && i < pagesAmount) {
+            paginationSection += `<button class="pagin-btn" id="pagin_btn${i}">${i}</button>`;
+            maxInd = i;
+        };
     };
-    if (tempArr[tempArr.length - 1] < (pagesAmount - 1)) {
+    if (maxInd < (pagesAmount - 1)) {
         paginationSection += `<span>. . .<span>`;
     };
     paginationSection += `<button class="pagin-btn" id="pagin_btn${pagesAmount}">${pagesAmount}</button>`;
