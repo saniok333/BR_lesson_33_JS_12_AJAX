@@ -17,22 +17,24 @@ let getMovies = (searchText, searchType, pageNumb) => {
     $('#details').html('');
     let request = `https://www.omdbapi.com/?apikey=68c6b1ea&s=${searchText}&type=${searchType}&page=${pageNumb}`;
     fetch(request).then((result) => {
-        return result.json();
-    }).then((data) => {
-        let pagesAmount = Math.ceil(data.totalResults / 10);
-        let movies = data.Search;
-        console.log(movies);
-        let output = '';
-        $.each(movies, (index, movie) => {
-            output += `<p>${(pageNumb-1)*10+index+1}. ${movie.Title} 
+            return result.json();
+        }).then((data) => {
+            let pagesAmount = Math.ceil(data.totalResults / 10);
+            let movies = data.Search;
+            let output = '';
+            $.each(movies, (index, movie) => {
+                output += `<p>${(pageNumb-1)*10+index+1}. ${movie.Title} 
             <button 
             onclick="showDetails('${movie.Title}', '${movie.Year}', '${movie.Poster}')">
             Details...</button></p>`;
+            });
+            if (pagesAmount > 1) output += formPaginBtnsSection(pageNumb, pagesAmount);
+            $('#movies').html(output);
+            $(`#pagin_btn${pageNumb}`).attr('disabled', 'disabled');
+        })
+        .catch(err => {
+            console.log("ERROR:", err.toString())
         });
-        if (pagesAmount > 1) output += formPaginBtnsSection(pageNumb, pagesAmount);
-        $('#movies').html(output);
-        $(`#pagin_btn${pageNumb}`).attr('disabled', 'disabled');
-    });
 };
 
 let formPaginBtnsSection = (pageNumb, pagesAmount) => {
