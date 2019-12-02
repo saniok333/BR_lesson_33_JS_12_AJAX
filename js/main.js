@@ -14,49 +14,70 @@ $(() => {
 });
 
 let getMovies = (searchText, searchType, pageNumb) => {
-    $('#details').html('');
+    $('#movies, #details').empty();
     let request = `https://www.omdbapi.com/?apikey=68c6b1ea&s=${searchText}&type=${searchType}&page=${pageNumb}`;
     fetch(request).then((result) => {
             return result.json();
         }).then((data) => {
             let pagesAmount = Math.ceil(data.totalResults / 10);
             let movies = data.Search;
-            let output = '';
             $.each(movies, (index, movie) => {
-                output += `<p>${(pageNumb-1)*10+index+1}. ${movie.Title} 
-            <button 
-            onclick="showDetails('${movie.Title}', '${movie.Year}', '${movie.Poster}')">
-            Details...</button></p>`;
+                $('<p>', {
+                        text: `${(pageNumb-1)*10+index+1}. ${movie.Title} `
+                    })
+                    .append($('<button>', {
+                        text: `Details...`
+                    }))
+                    .on('click', (e) => {
+                        $('#details').empty();
+                        $('#details').append($('<h4>', {
+                            text: `${movie.Title} ${movie.Year}`
+                        }));
+                        if (movie.Poster == 'N/A') return;
+                        $('#details').append($('<img>', {
+                            src: `${movie.Poster}`
+                        }));
+                    })
+                    .appendTo('#movies');
             });
-            if (pagesAmount > 1) output += formPaginBtnsSection(pageNumb, pagesAmount);
-            $('#movies').html(output);
+            if (pagesAmount > 1) formPaginBtnsSection(pageNumb, pagesAmount);
             $(`#pagin_btn${pageNumb}`).attr('disabled', 'disabled');
         })
         .catch(err => {
-            console.log("ERROR:", err.toString())
+            console.log("ERROR:", err.toString());
         });
 };
 
 let formPaginBtnsSection = (pageNumb, pagesAmount) => {
-    let paginationSection = `<button class="pagin-btn" id="pagin_btn1">1</button>`;
+    $('#movies').append($('<button>', {
+        class: `pagin-btn`,
+        id: `pagin_btn1`,
+        text: `1`,
+    }));
     if ((+pageNumb - 5) > 2) {
-        paginationSection += `<span>. . .<span>`;
+        $('#movies').append($('<span>', {
+            text: `. . .`,
+        }));
     };
     let maxInd;
     for (let i = (+pageNumb - 5); i <= (+pageNumb + 5); i++) {
         if (i > 1 && i < pagesAmount) {
-            paginationSection += `<button class="pagin-btn" id="pagin_btn${i}">${i}</button>`;
+            $('#movies').append($('<button>', {
+                class: `pagin-btn`,
+                id: `pagin_btn${i}`,
+                text: `${i}`,
+            }));
             maxInd = i;
         };
     };
     if (maxInd < (pagesAmount - 1)) {
-        paginationSection += `<span>. . .<span>`;
+        $('#movies').append($('<span>', {
+            text: `. . .`,
+        }));
     };
-    paginationSection += `<button class="pagin-btn" id="pagin_btn${pagesAmount}">${pagesAmount}</button>`;
-    return paginationSection;
-};
-
-let showDetails = (tite, year, poster) => {
-    movieDetails = `<h3>${tite}</h3><h4>${year}</h4><img src="${poster}"></img>`;
-    $('#details').html(movieDetails);
+    $('#movies').append($('<button>', {
+        class: `pagin-btn`,
+        id: `pagin_btn${pagesAmount}`,
+        text: `${pagesAmount}`,
+    }));
 };
