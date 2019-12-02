@@ -2,7 +2,6 @@
   "name": "br_lesson_33_js_12_ajax",
   "version": "1.0.0",
   "description": "",
-  // "main": "index.js",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
