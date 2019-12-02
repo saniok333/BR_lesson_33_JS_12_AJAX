@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 $(() => {
     $('body').on('submit', '#searchForm', (e) => {
         let searchText = $('#searchText').val();

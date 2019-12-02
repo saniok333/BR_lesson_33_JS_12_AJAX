@@ -1,0 +1,27 @@
+{
+  "name": "br_lesson_33_js_12_ajax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saniok333/BR_lesson_33_JS_12_AJAX.git"
+  },
+  "author": "ALEX",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saniok333/BR_lesson_33_JS_12_AJAX/issues"
+  },
+  "homepage": "https://github.com/saniok333/BR_lesson_33_JS_12_AJAX#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
