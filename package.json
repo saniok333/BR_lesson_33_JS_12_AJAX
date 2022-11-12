@@ -19,7 +19,7 @@
   "homepage": "https://github.com/saniok333/BR_lesson_33_JS_12_AJAX#readme",
   "devDependencies": {
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "jquery": "^3.4.1"
